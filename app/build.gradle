@@ -19,7 +19,7 @@ def getVersionCode = { ->
         return Integer.parseInt(stdout.toString().trim())
     }
     catch (ignored) {
-        return -1;
+        return -1
     }
 }
 
@@ -33,7 +33,7 @@ def getVersionName = { ->
         return stdout.toString().trim()
     }
     catch (ignored) {
-        return null;
+        return "dev"
     }
 }
 
@@ -57,7 +57,8 @@ android {
     }
     applicationVariants.all { variant ->
         if (variant.name == "debug") {
-            variant.outputs.each { o -> o.versionCodeOverride = System.currentTimeSeconds() }
+            variant.outputs.each { o -> o.versionCodeOverride = (int) (System.currentTimeMillis() / 1000L)
+            }
         }
     }
     compileOptions {
